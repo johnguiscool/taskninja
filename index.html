@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Task Ninja</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../bootstrap/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="album.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header>
+    </header>
+
+    <main role="main">
+
+      <section class="jumbotron text-center mb-0 bg-white">
+        <div class="container">
+          <h1 class="jumbotron-heading text-muted">Task Ninja</h1>
+        </div>
+      </section>
+
+      <section>
+        <div id="taskList" class="container">
+
+          <div id="savedItems">
+          </div>
+
+          <!-- div id="task1" class="my-2 text-center row justify-content-center">
+            <span class="task-description col-2">Task 1</span>
+            <progress id="task1Progress" class="mx-2 my-auto col-2" value=1 max=100></progress>
+            <button id="task1MarkCompleteButton" onclick='markComplete("task1")' class="button btn-primary rounded col-2">Mark Complete</button>
+          </div>
+
+          <div id="task2" class="my-2 text-center row justify-content-center">
+            <span class="task-description col-2">Task 2</span>
+            <progress id="task2Progress" class="mx-2 my-auto col-2" value=1 max=100></progress>
+            <button id="task2MarkCompleteButton" onclick='markComplete("task2")' class="button btn-primary rounded col-2">Mark Complete</button>
+          </div -->
+
+          <form id="newTask" class="my-5 text-center" action='javascript:addTask()'>
+            <input id="newTaskInput" name="newTaskInput" type="text" autocomplete="off">
+            <input type="submit" id="addTaskButton"  class="button btn-success rounded mx-3" value="Add Task"></button>
+          </form>
+
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="text-muted">
+      <div class="container">
+      </div>
+    </footer>
+
+  </div>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+<script>
+
+  var index = 1;
+
+  //////////////////////
+  //
+  //  BUTTON 1
+  //
+  // Function trIggers when the Mark Completed Button is clicked
+
+  function markComplete(idName){
+
+
+    //Set Progress
+    var element = document.getElementById(idName+"Progress");
+
+    console.log(idName+"Progress");
+    element.value=100;
+
+    //Disable button
+    console.log(idName+"MarkCompleteButton");
+
+    var element2 = document.getElementById(idName+"MarkCompleteButton");
+    element2.disabled = true;
+    element2.classList.remove("btn-primary");
+    element2.classList.add("btn-secondary");
+    element2.innerHTML = "Completed";
+
+    let xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function(){
+      if(this.readyState == 4 && this.status == 200) {
+      }
+    }
+    xmlhttp.open("GET","markcomplete.php?taskNumber=" + idName.substring(4));
+    xmlhttp.send();
+
+
+  }
+
+  //////////////////////
+  //
+  //  BUTTON 2
+  //
+  // Function triggers when the Add Task form is entered and submitted
+
+  function addTask(){
+    if (document.getElementById("newTaskInput").value) {
+
+      let taskName = "task" + index;
+
+      let taskDescription = document.getElementById("newTaskInput").value;
+
+      let para = document.createElement("div");
+      para.classList.add("my-2");
+      para.classList.add("text-center");
+      para.classList.add("row");
+      para.classList.add("justify-content-center");
+
+      let text = document.createElement("span");
+      para.appendChild(text);
+      text.innerHTML = document.getElementById("newTaskInput").value;
+      text.classList.add("col-2");
+      text.classList.add("text-truncate");
+      text.style.display ="inline-block";
+      text.classList.add("text-left");
+      text.classList.add("bg-light");
+
+
+
+      let progress = document.createElement("progress");
+      para.appendChild(progress);
+      progress.value = 0;
+      progress.classList.add("mx-2");
+      progress.setAttribute("id", taskName+"Progress");
+      progress.classList.add("col-2")
+
+
+      let button = document.createElement("button");
+      para.appendChild(button);
+      button.innerHTML = "Mark Complete";
+      button.classList.add("rounded");
+      button.classList.add("btn-primary");
+      button.setAttribute("id", taskName + "MarkCompleteButton");
+      button.classList.add("col-2");
+
+      button.addEventListener("click", function() {
+        markComplete(taskName);
+      }, false);
+
+
+
+
+      appendParent = document.getElementById("taskList");
+
+      let element = document.getElementById("newTask");
+      appendParent.insertBefore(para, element);
+
+
+      // AJAX code
+      // send
+      //  index : Task Number
+      //  document.getElementById("newTaskInput").value : Task description
+
+      let xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText);
+        }
+      }
+
+      xmlhttp.open("GET","addtask.php?taskNumber=" + index + "&taskDescription=" + taskDescription);
+      xmlhttp.send();
+
+
+      //Ending cleanup - clear out the form, and set the task to the next task;
+
+      document.getElementById("newTaskInput").value = "";
+      index = index+1;
+
+
+    }
+  }
+
+  //////////////////////
+  //
+  //  ON INITIALIZE:  Build the task table from an AJAX request
+  //
+  //
+
+
+
+    console.log("loaded");
+
+    let xml = new XMLHttpRequest();
+
+    //Open the AJAX Connection and get the information as a string
+    xml.onreadystatechange = function(){
+      if(this.readyState == 4 && this.status == 200) {
+        document.getElementById("savedItems").innerHTML = this.responseText;
+      }
+    }
+
+    xml.open("GET","readtext.php");
+    xml.send();
+
+    let xml2 = new XMLHttpRequest();
+
+    //Open the AJAX Connection and get the information as a string
+    xml2.onreadystatechange = function(){
+      if(this.readyState == 4 && this.status == 200) {
+        index = this.responseText.length + 1;
+        console.log(index);
+      }
+    }
+
+    xml2.open("GET","tasknumber.txt");
+    xml2.send();
+
+
+</script>
+
+  </body>
+</html>

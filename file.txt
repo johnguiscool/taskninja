@@ -1,0 +1,39 @@
+1|Study Ukrainian Email Form|x
+2|Study Ukrainian Authentication|
+3|Study Ukrainian Upload Lessons|
+4|Study Ukrainian Add Grammar|
+5|Indonesian - Separate Carousel|
+6|Tech - Refactor Task Ninja|x
+7|Tech - Photography website|
+8|Job - Update Github|x
+9|Study Ukrainian Email Errors|x
+10|Get T-Mobile Phone number fixed|x
+11|Get Chinese books from home|x
+12|Start building Chinese Anki Deck|x
+13|Start building Syntax Anki Deck|x
+14|Job - Get new email address|x
+15|Job - update resume with email|x
+16|Tech - Plan to learn Vue|
+17|Tech - Plan to learn React|
+18|Job - Add AJAX to resume|
+19|Laracast 08 - Controllers (review)|x
+20|Laracast 09 - Route Model Binding (review)|x
+21|Laracast 13 - Rendering Posts|
+22|Laracast 14 - Laravel Mix|
+23|Laracast 17 - Authentication|x
+24|Laracast 18 - Authentication 2|x
+25|Laracast 19 - Authentication 3|x
+26|Laracast 26 - Sending Email|
+27|Laracast 29 - Sessions|
+28|Tech - Download Study Ukrainian|x
+29|Tech - Git upload Study Ukrainian|
+30|Email Leroy|x
+31|Writing - The Cave|
+32|Job - Talk to CSU re: jobs|x
+33|Job - Talk to Case Western re: jobs|xxxxx
+34|Job - Talk to TechElevator re: jobs|x
+35|Job - update resume with email|x
+32|Job - Treehouse node site|
+33|Job - Treehouse React 1|
+34|Job - Treehouse React 2|
+39|Talk to Corbin re: Wordpress Experience|x
